@@ -23,6 +23,9 @@ The architecture is designed to scale for very high web traffic.
 - MongoDB
 - MariaDB
 - Queuing
+- Protobuf
+- Docker
+- Kubernetes
 - Terraform
 - Monitoring
 - Unit testing
