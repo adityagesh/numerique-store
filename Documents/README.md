@@ -34,3 +34,15 @@ The architecture is designed to scale for very high web traffic.
 
 
 # Tasks
+
+
+
+# UI Workflow
+- Customer can register by themself using email id
+- Login page is the homepage
+- After login, customer is taken to product listing and searching page
+- Customer can click on a product to get detailed view
+- Detailed product view has option to add product to cart
+- Customer can view the cart
+- Products can be removed from cart
+- Order is placed when cart is checkout
