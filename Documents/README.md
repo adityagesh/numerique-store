@@ -14,4 +14,20 @@ The architecture is designed to scale for very high web traffic.
 - NoSQL database is used for Products since the data is largely unstructured. A caching mechanism is used as the data for products mostly remains unchanged.  
 - Order service has complex processing, which could result in a delay in response. A queuing mechanism is used to avoid potential problems caused by heavy web traffic.   
 
+# Features/ Technology stack
+
+- Golang
+- Redis
+- gRPC
+- HTTP REST
+- MongoDB
+- MariaDB
+- Queuing
+- Terraform
+- Monitoring
+- Unit testing
+- Benchmarking
+- OAuth 2.0
+
+
 # Tasks
