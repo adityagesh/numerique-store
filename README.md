@@ -1,2 +1,2 @@
-# numerique-store
-Ecommerce Platform
+# Numérique Store
+ An Ecommerce Platform
