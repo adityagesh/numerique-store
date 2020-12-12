@@ -30,7 +30,7 @@ The architecture is designed to scale for very high web traffic.
 - Monitoring
 - Unit testing
 - Benchmarking
-- OAuth 2.0
+- OAuth 2.0 - OIDC
 
 
 # Tasks
