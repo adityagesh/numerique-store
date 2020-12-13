@@ -1,0 +1,30 @@
+syntax="proto3";
+package register;
+
+option go_package = "github.com/adityagesh/numerique-store/customers/register";
+message RegisterRequest {
+    string first_name = 1;
+    string last_name = 2;
+    string addr_line1 = 3;
+    string addr_line2 = 4;
+    string city = 6;
+    string state = 7;
+    string country = 8;
+    int32 phone = 9;
+    int32 pincode = 5;
+
+}
+
+message RegisterResponse {
+    string message = 1;
+    Error error = 2;
+}
+
+message Error {
+    string message = 2;
+    string code = 1;
+}
+
+service registerService {
+    rpc Register (RegisterRequest) returns (RegisterResponse);
+}
