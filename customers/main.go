@@ -34,7 +34,6 @@ func run() {
 		log.Fatalf("Error starting server %v", err)
 	}
 	log.Printf("Server started in port %v", lis.Addr().String())
-
 	grpcServer := grpc.NewServer()
 
 	if err := grpcServer.Serve(lis); err != nil {
