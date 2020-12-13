@@ -1,12 +1,12 @@
 package main
 
 import (
-	"log"
 	"net"
 	"os"
 	"os/signal"
 	"syscall"
 
+	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )
 
@@ -20,7 +20,7 @@ func gracefulShutDown() {
 	signal.Notify(shutdown, os.Interrupt, syscall.SIGTERM)
 	go func() {
 		<-shutdown
-		log.Printf("Gracefully shutting down server...")
+		log.Info("Gracefully shutting down server...")
 		// Handle graceful shutdown
 		os.Exit(0)
 	}()
@@ -35,7 +35,6 @@ func run() {
 	}
 	log.Printf("Server started in port %v", lis.Addr().String())
 	grpcServer := grpc.NewServer()
-
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Error binding GRPC server %v", err)
 	}
