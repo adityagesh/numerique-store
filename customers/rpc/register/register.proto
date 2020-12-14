@@ -3,6 +3,7 @@ package register;
 
 option go_package = "github.com/adityagesh/numerique-store/customers/register";
 message RegisterRequest {
+    string user_name = 10;
     string first_name = 1;
     string last_name = 2;
     string addr_line1 = 3;
@@ -17,6 +18,7 @@ message RegisterRequest {
 
 message RegisterResponse {
     string message = 1;
+    string uid = 3;
     Error error = 2;
 }
 
@@ -26,5 +28,5 @@ message Error {
 }
 
 service registerService {
-    rpc Register (RegisterRequest) returns (RegisterResponse);
+    rpc RegisterCustomer (RegisterRequest) returns (RegisterResponse);
 }

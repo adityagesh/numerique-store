@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/adityagesh/numerique-store/customers/rpc/register"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )
@@ -34,7 +35,10 @@ func run() {
 		log.Fatalf("Error starting server %v", err)
 	}
 	log.Printf("Server started in port %v", lis.Addr().String())
+
 	grpcServer := grpc.NewServer()
+	// register customer register rpc
+	register.RegisterRegisterServiceServer(grpcServer, &register.Server{})
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Error binding GRPC server %v", err)
 	}
