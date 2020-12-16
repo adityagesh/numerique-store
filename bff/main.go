@@ -18,9 +18,10 @@ func main() {
 }
 
 func run() {
-	srvr := &Server{
+	httpSrvr := &Server{
 		router: mux.NewRouter().StrictSlash(true),
 	}
-	srvr.routes()
-	log.Fatal(http.ListenAndServe(":8080", srvr.router))
+	httpSrvr.routes()
+	log.Printf("HTTP server started in port 8080")
+	log.Fatal(http.ListenAndServe(":8080", httpSrvr.router))
 }
