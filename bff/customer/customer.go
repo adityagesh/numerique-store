@@ -8,7 +8,13 @@ import (
 
 	"github.com/adityagesh/numerique-store/bff/customer/register"
 	log "github.com/sirupsen/logrus"
+	"google.golang.org/grpc"
 )
+
+// Context contains GRPC Client Connection
+type Context struct {
+	GRPCConnection *grpc.ClientConn
+}
 
 // Handler is HTTP handler for customer
 func Handler(w http.ResponseWriter, req *http.Request) {
@@ -17,7 +23,7 @@ func Handler(w http.ResponseWriter, req *http.Request) {
 }
 
 // Register is HTTP handler to register customer
-func Register(w http.ResponseWriter, r *http.Request) {
+func (ctx Context) Register(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		var customerDetails register.RegisterRequest
 		err := json.NewDecoder(r.Body).Decode(&customerDetails)
@@ -27,9 +33,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		}
 		log.Printf("Registering customer: %v ", customerDetails.UserName)
 
-		conn, err := grpcClientConnection()
-		defer conn.Close()
-		registerServiceClient := register.NewRegisterServiceClient(conn)
+		registerServiceClient := register.NewRegisterServiceClient(ctx.GRPCConnection)
 
 		resp, err := registerServiceClient.RegisterCustomer(context.Background(), &customerDetails)
 		if err != nil {
@@ -38,5 +42,4 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Response from Server %v", resp)
 		fmt.Fprintf(w, resp.Message)
 	}
-
 }

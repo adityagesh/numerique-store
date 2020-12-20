@@ -18,12 +18,12 @@ type RegisterServer struct {
 
 // RegisterCustomer is handler that implementes gRPC method to Register Customer
 func (s *RegisterServer) RegisterCustomer(ctx context.Context, request *register.RegisterRequest) (*register.RegisterResponse, error) {
-	sql := fmt.Sprintf("INSERT INTO customer(username, first_name, last_name, email, phone) VALUES (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\")", request.UserName, request.FirstName, request.LastName, request.Email, request.Phone)
-	log.Printf(sql)
-	res, err := s.DB.Exec(sql)
+	sql := "INSERT INTO customer(`username`, `first_name`, `last_name`, `email`, `phone`) VALUES (?, ?, ?, ?, ?)"
+	res, err := s.DB.Exec(sql, request.UserName, request.FirstName, request.LastName, request.Email, request.Phone)
 	if err != nil {
 		log.Printf("Error registering customer %v", err)
-		return &register.RegisterResponse{Message: "Error creating user", Error: nil}, nil
+		return &register.RegisterResponse{Message: "Error creating user",
+			Error: &register.Error{Message: fmt.Sprint(err), Code: "500"}}, nil
 	}
 	id, _ := res.LastInsertId()
 	log.Printf("Customer created successfully: %v", id)

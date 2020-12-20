@@ -14,7 +14,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-var db *sql.DB = createDatabaseConnection()
+var db *sql.DB
 
 func main() {
 	gracefulShutDown()
@@ -25,6 +25,7 @@ func run() {
 	lis, err := net.Listen("tcp", ":9000")
 	defer lis.Close()
 
+	db = createDatabaseConnection()
 	if err != nil {
 		log.Fatalf("Error starting server %v", err)
 	}
