@@ -11,14 +11,15 @@ message RegisterRequest {
     string city = 6;
     string state = 7;
     string country = 8;
-    int32 phone = 9;
+    string phone = 9;
+    string email = 11;
     int32 pincode = 5;
 
 }
 
 message RegisterResponse {
     string message = 1;
-    string uid = 3;
+    int64 id = 3;
     Error error = 2;
 }
 
